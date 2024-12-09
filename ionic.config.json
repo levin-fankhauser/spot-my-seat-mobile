@@ -1,0 +1,7 @@
+{
+  "name": "spot-my-seat-mobile",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
