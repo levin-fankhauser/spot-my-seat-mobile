@@ -78,14 +78,8 @@ export class AppComponent implements OnInit {
     { title: 'Manage my Seats', url: '/', icon: 'cog' },
   ];
   paletteToggle = false;
-  currentRoute: string = '';
 
-  constructor(private router: Router) {
-    this.router.events.subscribe(() => {
-      const route = this.router.url;
-      this.currentRoute = route.charAt(1).toUpperCase() + route.slice(2);
-    });
-
+  constructor() {
     addIcons({
       home,
       homeOutline,
