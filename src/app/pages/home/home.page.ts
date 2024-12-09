@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonCard,
+  IonCardHeader,
+  IonCardTitle,
   IonContent,
   IonHeader,
   IonTitle,
@@ -16,6 +18,8 @@ import { HeaderComponent } from '../../components/header/header.component';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
+    IonCardTitle,
+    IonCardHeader,
     IonCard,
     IonContent,
     IonHeader,

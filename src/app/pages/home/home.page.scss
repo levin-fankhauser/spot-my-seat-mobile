@@ -1,0 +1,22 @@
+ion-card-header {
+    align-items: center;
+}
+
+ion-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.large {
+    height: 25%;
+    margin-bottom: 20px;
+}
+
+.card-row {
+    margin-top: -10px;
+    display: flex;
+    height: 25%;
+}
