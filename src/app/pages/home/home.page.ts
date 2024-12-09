@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
+  IonCard,
   IonContent,
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonButtons,
-  IonMenuButton,
 } from '@ionic/angular/standalone';
+import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
   selector: 'app-home',
@@ -16,18 +16,16 @@ import {
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonButtons,
+    IonCard,
     IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,
     CommonModule,
     FormsModule,
-    IonMenuButton,
+    HeaderComponent,
   ],
 })
-export class HomePage implements OnInit {
+export class HomePage {
   constructor() {}
-
-  ngOnInit(): void {}
 }

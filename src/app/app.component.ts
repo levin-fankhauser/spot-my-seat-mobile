@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import {
   IonApp,
   IonContent,
@@ -73,8 +78,14 @@ export class AppComponent implements OnInit {
     { title: 'Manage my Seats', url: '/', icon: 'cog' },
   ];
   paletteToggle = false;
+  currentRoute: string = '';
 
-  constructor() {
+  constructor(private router: Router) {
+    this.router.events.subscribe(() => {
+      const route = this.router.url;
+      this.currentRoute = route.charAt(1).toUpperCase() + route.slice(2);
+    });
+
     addIcons({
       home,
       homeOutline,
