@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import {
   IonApp,
@@ -15,6 +15,7 @@ import {
   IonRouterLink,
   IonRouterOutlet,
   IonSplitPane,
+  IonToggle,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import {
@@ -44,6 +45,7 @@ import {
   styleUrls: ['app.component.scss'],
   standalone: true,
   imports: [
+    IonToggle,
     RouterLink,
     RouterLinkActive,
     CommonModule,
@@ -62,7 +64,7 @@ import {
     IonRouterOutlet,
   ],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/', icon: 'home' },
     { title: 'Set your Seat', url: '/', icon: 'train' },
@@ -70,6 +72,8 @@ export class AppComponent {
     { title: 'Search Seat by ID', url: '/', icon: 'search' },
     { title: 'Manage my Seats', url: '/', icon: 'cog' },
   ];
+  paletteToggle = false;
+
   constructor() {
     addIcons({
       home,
@@ -91,5 +95,35 @@ export class AppComponent {
       cogOutline,
       cogSharp,
     });
+  }
+
+  ngOnInit() {
+    // Use matchMedia to check the user preference
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // Initialize the dark palette based on the initial
+    // value of the prefers-color-scheme media query
+    this.initializeDarkPalette(prefersDark.matches);
+
+    // Listen for changes to the prefers-color-scheme media query
+    prefersDark.addEventListener('change', (mediaQuery) =>
+      this.initializeDarkPalette(mediaQuery.matches)
+    );
+  }
+
+  // Check/uncheck the toggle and update the palette based on isDark
+  initializeDarkPalette(isDark: boolean) {
+    this.paletteToggle = isDark;
+    this.toggleDarkPalette(isDark);
+  }
+
+  // Listen for the toggle check/uncheck to toggle the dark palette
+  toggleChange(ev: CustomEvent) {
+    this.toggleDarkPalette(ev.detail.checked);
+  }
+
+  // Add or remove the "ion-palette-dark" class on the html element
+  toggleDarkPalette(shouldAdd: boolean) {
+    document.documentElement.classList.toggle('ion-palette-dark', shouldAdd);
   }
 }
