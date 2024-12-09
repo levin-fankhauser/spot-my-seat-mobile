@@ -31,7 +31,7 @@ import { S3Component } from '../trains/s3/s3.component';
   ],
 })
 export class SeatPickerComponent {
-  trainValue = 'ir27';
+  trainValue = 's3';
   totalWagonsValue = '8';
   yourWagonValue = '';
   floorValue = '1';
