@@ -1,0 +1,61 @@
+<div class="seat-picker">
+  <div class="left-form">
+    <ion-select
+      [value]="trainValue"
+      label="Train"
+      interface="popover"
+      label-placement="floating"
+      fill="outline"
+    >
+      <ion-select-option value="s3">S3</ion-select-option>
+      <ion-select-option value="ir27">IR27</ion-select-option>
+    </ion-select>
+    <ion-input
+      [value]="totalWagonsValue"
+      label="Total Wagons"
+      labelPlacement="floating"
+      fill="outline"
+      type="number"
+    />
+    <ion-input
+      [value]="yourWagonValue"
+      label="Your Wagons"
+      labelPlacement="floating"
+      fill="outline"
+      type="number"
+    />
+    <ion-select
+      [value]="floorValue"
+      label="Floor"
+      interface="popover"
+      label-placement="floating"
+      fill="outline"
+    >
+      <ion-select-option value="0">Ground floor</ion-select-option>
+      <ion-select-option value="1">First floor</ion-select-option>
+    </ion-select>
+    <ion-input
+      [value]="fromValue"
+      label="From"
+      labelPlacement="floating"
+      fill="outline"
+    />
+    <ion-input
+      [value]="toValue"
+      label="To"
+      labelPlacement="floating"
+      fill="outline"
+    />
+    <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+    <ion-modal [keepContentsMounted]="true">
+      <ng-template>
+        <ion-datetime id="datetime"></ion-datetime>
+      </ng-template>
+    </ion-modal>
+    <ion-button>
+      <ion-icon icon="camera" />
+    </ion-button>
+  </div>
+  <div class="">right</div>
+</div>

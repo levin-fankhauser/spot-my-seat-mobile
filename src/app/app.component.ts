@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  ActivatedRoute,
-  Router,
-  RouterLink,
-  RouterLinkActive,
-} from '@angular/router';
+import { RouterLink } from '@angular/router';
 import {
   IonApp,
   IonContent,
@@ -52,7 +47,6 @@ import {
   imports: [
     IonToggle,
     RouterLink,
-    RouterLinkActive,
     CommonModule,
     IonApp,
     IonSplitPane,
