@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import {
-  IonInput,
-  IonSelect,
-  IonSelectOption,
+  IonButton,
   IonDatetime,
   IonDatetimeButton,
-  IonModal,
-  IonButton,
   IonIcon,
-  IonLabel,
+  IonInput,
+  IonModal,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
+import { S3Component } from '../trains/s3/s3.component';
 
 @Component({
   selector: 'app-seat-picker',
@@ -19,7 +19,6 @@ import { camera } from 'ionicons/icons';
   styleUrls: ['./seat-picker.component.scss'],
   standalone: true,
   imports: [
-    IonLabel,
     IonIcon,
     IonButton,
     IonModal,
@@ -28,6 +27,7 @@ import { camera } from 'ionicons/icons';
     IonInput,
     IonSelect,
     IonSelectOption,
+    S3Component,
   ],
 })
 export class SeatPickerComponent {
