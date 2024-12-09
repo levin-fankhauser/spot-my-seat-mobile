@@ -72,7 +72,7 @@ import {
 export class AppComponent implements OnInit {
   public appPages = [
     { title: 'Home', url: '/', icon: 'home' },
-    { title: 'Set your Seat', url: '/', icon: 'train' },
+    { title: 'Set your Seat', url: '/create-seat', icon: 'train' },
     { title: 'Blog', url: '/', icon: 'chatbubbles' },
     { title: 'Search Seat by ID', url: '/', icon: 'search' },
     { title: 'Manage my Seats', url: '/', icon: 'cog' },

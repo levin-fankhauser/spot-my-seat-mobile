@@ -11,4 +11,11 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/home/home.page').then((m) => m.HomePage),
   },
+  {
+    path: 'create-seat',
+    loadComponent: () =>
+      import('./pages/create-seat/create-seat.page').then(
+        (m) => m.CreateSeatPage
+      ),
+  },
 ];
