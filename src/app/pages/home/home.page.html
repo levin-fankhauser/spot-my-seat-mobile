@@ -1,23 +1,23 @@
 <app-header title="Home" />
 <ion-content [fullscreen]="true">
   <ion-title><h2 align="center">Home</h2></ion-title>
-  <ion-card class="large" href="/seat">
+  <ion-card class="large" (click)="routeTo('/create-seat')">
     <ion-card-header>
       <ion-card-title>Set your Seat</ion-card-title>
     </ion-card-header>
   </ion-card>
-  <ion-card class="large" href="/blog">
+  <ion-card class="large" (click)="routeTo('/blog')">
     <ion-card-header>
       <ion-card-title>Blog</ion-card-title>
     </ion-card-header>
   </ion-card>
   <div class="card-row">
-    <ion-card href="/search">
+    <ion-card (click)="routeTo('/search')">
       <ion-card-header>
         <ion-card-title>Search Seat by ID</ion-card-title>
       </ion-card-header>
     </ion-card>
-    <ion-card href="/manage">
+    <ion-card (click)="routeTo('/manage')">
       <ion-card-header>
         <ion-card-title>Manage my Seats</ion-card-title>
       </ion-card-header>

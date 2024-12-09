@@ -6,11 +6,10 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
-  IonHeader,
   IonTitle,
-  IonToolbar,
 } from '@ionic/angular/standalone';
 import { HeaderComponent } from '../../components/header/header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -22,14 +21,16 @@ import { HeaderComponent } from '../../components/header/header.component';
     IonCardHeader,
     IonCard,
     IonContent,
-    IonHeader,
     IonTitle,
-    IonToolbar,
     CommonModule,
     FormsModule,
     HeaderComponent,
   ],
 })
 export class HomePage {
-  constructor() {}
+  constructor(private router: Router) {}
+
+  routeTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
 }
