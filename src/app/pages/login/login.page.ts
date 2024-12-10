@@ -1,29 +1,23 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonButton, IonInput } from '@ionic/angular/standalone';
-import { HeaderComponent } from '../../components/header/header.component';
+import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
+import { HeaderComponent } from '../../components/header/header.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [
-    IonInput,
-    IonButton,
-    IonContent,
-    CommonModule,
-    FormsModule,
-    HeaderComponent,
-  ],
+  imports: [CommonModule, FormsModule, HeaderComponent, IonicModule],
 })
 export class LoginPage {
   email = '';
   password = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {}
 
   async login() {
     const { error } = await this.authService.signIn(this.email, this.password);
@@ -32,5 +26,9 @@ export class LoginPage {
     } else {
       console.log('Login successful');
     }
+  }
+
+  routeTo(path: string) {
+    this.router.navigateByUrl(path);
   }
 }

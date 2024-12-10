@@ -2,9 +2,9 @@
 
 <ion-content align="center" [fullscreen]="true">
   <ion-title>
-    <h1>Login</h1>
+    <h1>Register</h1>
   </ion-title>
-  <form (ngSubmit)="login()">
+  <form (ngSubmit)="register()">
     <ion-item>
       <ion-label position="floating">E-Mail</ion-label>
       <ion-input
@@ -23,9 +23,9 @@
         required
       ></ion-input>
     </ion-item>
-    <ion-button expand="block" type="submit">Login</ion-button>
+    <ion-button expand="block" type="submit">Register</ion-button>
   </form>
-  <ion-button expand="block" fill="clear" (click)="routeTo('/register')"
-    >Register</ion-button
+  <ion-button expand="block" fill="clear" (click)="routeTo('/login')"
+    >Back to Login</ion-button
   >
 </ion-content>

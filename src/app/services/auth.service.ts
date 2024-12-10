@@ -20,4 +20,6 @@ export class AuthService {
   async resetPassword(email: string) {
     return await supabase.auth.resetPasswordForEmail(email);
   }
+
+  async isUserLoggedIn() {}
 }
