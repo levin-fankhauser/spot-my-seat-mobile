@@ -3,17 +3,17 @@
 <ion-content align="center" [fullscreen]="true">
   <form (ngSubmit)="login()">
     <ion-input
+      [(ngModel)]="email"
       clearInput="true"
       placeholder="Email"
       name="email"
-      (ionInput)="setEmail($event)"
     ></ion-input>
     <ion-input
+      [(ngModel)]="password"
       clearInput="true"
       type="password"
       placeholder="Password"
       name="password"
-      (ionInput)="setPassword($event)"
     ></ion-input>
     <ion-button type="submit">Login</ion-button>
   </form>

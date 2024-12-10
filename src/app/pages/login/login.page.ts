@@ -26,22 +26,11 @@ export class LoginPage {
   constructor(private authService: AuthService) {}
 
   async login() {
-    console.log(this.email);
-    console.log(this.password);
-
     const { error } = await this.authService.signIn(this.email, this.password);
     if (error) {
       console.error('Login failed:', error.message);
     } else {
       console.log('Login successful');
     }
-  }
-
-  setEmail(event: CustomEvent) {
-    this.email = event.detail.value;
-  }
-
-  setPassword(event: CustomEvent) {
-    this.password = event.detail.value;
   }
 }
