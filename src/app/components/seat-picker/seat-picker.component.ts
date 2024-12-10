@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import {
   IonButton,
   IonDatetime,
@@ -12,6 +13,7 @@ import {
 import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
 import { S3Component } from '../trains/s3/s3.component';
+import { Seat } from 'src/app/models/seat';
 
 @Component({
   selector: 'app-seat-picker',
@@ -28,17 +30,45 @@ import { S3Component } from '../trains/s3/s3.component';
     IonSelect,
     IonSelectOption,
     S3Component,
+    FormsModule,
   ],
 })
 export class SeatPickerComponent {
-  trainValue = 's3';
+  @Output()
+  seat = new EventEmitter<Seat>();
+
+  trainValue: 's3' = 's3';
   totalWagonsValue = '8';
   yourWagonValue = '';
-  floorValue = '1';
+  floorValue: '0' | '1' = '1';
   fromValue = 'Basel';
   toValue = 'Bern';
+  dateTimeValue = new Date().toISOString();
+  imageValue = '';
+  seatValue = '';
 
   constructor() {
     addIcons({ camera });
+  }
+
+  setSeatValue(seatValue: string) {
+    this.seatValue = seatValue;
+    this.onInputChange();
+  }
+
+  onInputChange() {
+    const seat: Seat = {
+      train: this.trainValue,
+      totalWagons: this.totalWagonsValue,
+      yourWagon: this.yourWagonValue,
+      floor: this.floorValue,
+      from: this.fromValue,
+      to: this.toValue,
+      dateTime: this.dateTimeValue,
+      image: this.imageValue,
+      seat: this.seatValue,
+    };
+
+    this.seat.emit(seat);
   }
 }

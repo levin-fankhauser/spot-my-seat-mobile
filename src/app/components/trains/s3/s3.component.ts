@@ -1,17 +1,22 @@
-import { Component } from '@angular/core';
-import { IonContent, IonRadio, IonRadioGroup } from '@ionic/angular/standalone';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { IonRadio, IonRadioGroup, IonButton } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-s3',
   templateUrl: './s3.component.html',
   styleUrls: ['./s3.component.scss'],
   standalone: true,
-  imports: [IonRadioGroup, IonRadio, IonContent],
+  imports: [IonRadioGroup, IonRadio, FormsModule],
 })
 export class S3Component {
+  seatValue = '';
   constructor() {}
 
-  selectSeat = (seat: any) => {
-    console.log(seat);
-  };
+  @Output()
+  selectedSeat = new EventEmitter<string>();
+
+  emitSeat() {
+    this.selectedSeat.emit(this.seatValue);
+  }
 }

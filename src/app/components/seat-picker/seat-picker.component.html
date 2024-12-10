@@ -1,31 +1,35 @@
 <div class="seat-picker">
   <div class="left-form">
     <ion-select
-      [value]="trainValue"
+      [(ngModel)]="trainValue"
+      (ngModelChange)="onInputChange()"
       label="Train"
       interface="popover"
       label-placement="floating"
       fill="outline"
     >
       <ion-select-option value="s3">S3</ion-select-option>
-      <ion-select-option value="ir27">IR27</ion-select-option>
+      <!-- <ion-select-option value="ir27">IR27</ion-select-option> -->
     </ion-select>
     <ion-input
-      [value]="totalWagonsValue"
+      [(ngModel)]="totalWagonsValue"
+      (ngModelChange)="onInputChange()"
       label="Total Wagons"
       labelPlacement="floating"
       fill="outline"
       type="number"
     />
     <ion-input
-      [value]="yourWagonValue"
-      label="Your Wagons"
+      [(ngModel)]="yourWagonValue"
+      (ngModelChange)="onInputChange()"
+      label="Your Wagon"
       labelPlacement="floating"
       fill="outline"
       type="number"
     />
     <ion-select
-      [value]="floorValue"
+      [(ngModel)]="floorValue"
+      (ngModelChange)="onInputChange()"
       label="Floor"
       interface="popover"
       label-placement="floating"
@@ -35,13 +39,15 @@
       <ion-select-option value="1">First floor</ion-select-option>
     </ion-select>
     <ion-input
-      [value]="fromValue"
+      [(ngModel)]="fromValue"
+      (ngModelChange)="onInputChange()"
       label="From"
       labelPlacement="floating"
       fill="outline"
     />
     <ion-input
-      [value]="toValue"
+      [(ngModel)]="toValue"
+      (ngModelChange)="onInputChange()"
       label="To"
       labelPlacement="floating"
       fill="outline"
@@ -50,16 +56,31 @@
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
-        <ion-datetime id="datetime"></ion-datetime>
+        <ion-datetime
+          id="datetime"
+          [(ngModel)]="dateTimeValue"
+          (ngModelChange)="onInputChange()"
+        ></ion-datetime>
       </ng-template>
     </ion-modal>
     <ion-button>
       <ion-icon icon="camera" />
     </ion-button>
   </div>
+
   <div class="right-form">
     @if (true) {
-    <app-s3 />
+    <app-s3 (selectedSeat)="setSeatValue($event)" />
     }
+    <div>
+      {{ trainValue }} <br />
+      {{ totalWagonsValue }}<br />
+      {{ yourWagonValue }}<br />
+      {{ floorValue }}<br />
+      {{ fromValue }}<br />
+      {{ toValue }}<br />
+      {{ dateTimeValue }}<br />
+      {{ seatValue }}<br />
+    </div>
   </div>
 </div>

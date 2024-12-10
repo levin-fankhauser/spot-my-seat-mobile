@@ -1,7 +1,10 @@
 <app-header />
 <ion-content [fullscreen]="true">
   <ion-title><h2 align="center">Pick your Seat</h2></ion-title>
-  <div class="seat-picker">
-    <app-seat-picker />
-  </div>
+  <form class="seat-picker" (ngSubmit)="createSeat()">
+    <app-seat-picker (seat)="setSeat($event)" />
+    <ion-button expand="block" color="success" type="submit"
+      >Create Seat</ion-button
+    >
+  </form>
 </ion-content>

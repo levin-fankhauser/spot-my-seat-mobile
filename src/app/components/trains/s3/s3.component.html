@@ -1,7 +1,7 @@
 <div class="wrapper">
   <h4 align="center">S3</h4>
   <div class="train-outline">
-    <ion-radio-group>
+    <ion-radio-group (ionChange)="emitSeat()" [(ngModel)]="seatValue">
       <div class="select">
         <div class="four">
           <ion-radio labelPlacement="stacked" value="1" />
