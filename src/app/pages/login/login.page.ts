@@ -19,12 +19,9 @@ export class LoginPage {
   password = '';
 
   constructor(private router: Router, private authService: AuthService) {
-    supabase.auth.onAuthStateChange((event, session) => {
+    supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
-        console.log('User logged in:', session.user);
         this.router.navigateByUrl('/home');
-      } else {
-        console.log('User logged out');
       }
     });
   }

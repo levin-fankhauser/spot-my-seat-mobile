@@ -1,17 +1,15 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonCard,
   IonCardHeader,
   IonCardTitle,
   IonContent,
   IonTitle,
-  IonButton,
 } from '@ionic/angular/standalone';
 import { HeaderComponent } from '../../components/header/header.component';
-import { Router } from '@angular/router';
-import { supabase } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +17,6 @@ import { supabase } from 'src/app/services/supabase.service';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
-    IonButton,
     IonCardTitle,
     IonCardHeader,
     IonCard,
@@ -35,10 +32,5 @@ export class HomePage {
 
   routeTo(path: string) {
     this.router.navigateByUrl(path);
-  }
-
-  async getSession() {
-    const session = await supabase.auth.getUser();
-    console.log(session);
   }
 }
