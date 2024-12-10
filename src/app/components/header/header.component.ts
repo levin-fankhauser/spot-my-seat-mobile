@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import {
   IonHeader,
   IonToolbar,
@@ -23,5 +24,9 @@ import {
   ],
 })
 export class HeaderComponent {
-  constructor() {}
+  constructor(private router: Router) {}
+
+  routeTo(path: string) {
+    this.router.navigateByUrl(path);
+  }
 }
