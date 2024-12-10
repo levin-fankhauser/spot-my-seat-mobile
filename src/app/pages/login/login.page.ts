@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { AuthService } from 'src/app/services/auth.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Router } from '@angular/router';
+import { supabase } from 'src/app/services/supabase.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,16 @@ export class LoginPage {
   email = '';
   password = '';
 
-  constructor(private router: Router, private authService: AuthService) {}
+  constructor(private router: Router, private authService: AuthService) {
+    supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        console.log('User logged in:', session.user);
+        this.router.navigateByUrl('/home');
+      } else {
+        console.log('User logged out');
+      }
+    });
+  }
 
   async login() {
     const { error } = await this.authService.signIn(this.email, this.password);
