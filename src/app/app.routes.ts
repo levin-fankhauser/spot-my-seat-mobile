@@ -54,4 +54,10 @@ export const routes: Routes = [
       import('./pages/search/search.page').then((m) => m.SearchPage),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'edit-seat/:id',
+    loadComponent: () =>
+      import('./pages/edit-seat/edit-seat.page').then((m) => m.EditSeatPage),
+    canActivate: [AuthGuard],
+  },
 ];

@@ -33,8 +33,12 @@ export class SeatItemComponent implements OnInit {
     this.dateTime = new Date(this.seat.dateTime).toLocaleString().slice(0, -3);
   }
 
-  routeToItem() {
+  routeToShowItem() {
     this.router.navigateByUrl('/seat/' + this.seat.id);
+  }
+
+  routeToEditItem() {
+    this.router.navigateByUrl('/edit-seat/' + this.seat.id);
   }
 
   deleteItem() {

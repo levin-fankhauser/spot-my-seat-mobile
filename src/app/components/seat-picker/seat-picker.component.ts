@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import {
   IonButton,
@@ -37,9 +37,12 @@ import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
     CommonModule,
   ],
 })
-export class SeatPickerComponent {
+export class SeatPickerComponent implements OnInit {
   @Output()
   seat = new EventEmitter<Seat>();
+
+  @Input()
+  initialSeat: Seat | undefined | null;
 
   trainValue: 's3' = 's3';
   totalWagonsValue = '8';
@@ -55,6 +58,21 @@ export class SeatPickerComponent {
 
   constructor(private seatService: SeatsService) {
     addIcons({ camera });
+  }
+
+  ngOnInit(): void {
+    if (this.initialSeat) {
+      this.trainValue = this.initialSeat.train;
+      this.totalWagonsValue = this.initialSeat.totalWagons;
+      this.yourWagonValue = this.initialSeat.yourWagon;
+      this.floorValue =
+        (this.initialSeat.floor as unknown as number) == 0 ? '0' : '1';
+      this.fromValue = this.initialSeat.from;
+      this.toValue = this.initialSeat.to;
+      this.dateTimeValue = this.initialSeat.dateTime;
+      this.imageValue = this.initialSeat.image;
+      this.seatValue = (this.initialSeat.seat as unknown as number).toString();
+    }
   }
 
   setSeatValue(seatValue: string) {

@@ -56,6 +56,9 @@
     <ion-button (click)="takePhoto()" size="default">
       <ion-icon name="camera"></ion-icon>
     </ion-button>
+    <div>
+      <img [src]="imageValue" />
+    </div>
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
@@ -70,7 +73,7 @@
 
   <div class="right-form">
     @if (trainValue === 's3') {
-    <app-s3 (selectedSeat)="setSeatValue($event)" />
+    <app-s3 (selectedSeat)="setSeatValue($event)" [seatValue]="seatValue" />
     }
   </div>
 </div>

@@ -1,0 +1,17 @@
+<app-header />
+<ion-content [fullscreen]="true">
+  <ion-title><h2 align="center">Update Seat {{seat?.id}}</h2></ion-title>
+  <form class="seat-picker" *ngIf="seat" (ngSubmit)="editSeat()">
+    <app-seat-picker [initialSeat]="seat" (seat)="setSeat($event)" />
+    <ion-button expand="block" color="success" type="submit"
+      >Update Seat</ion-button
+    >
+  </form>
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="All fields are required!"
+    message="Fill in all fields to continue."
+    [buttons]="alertButtons"
+    (didDismiss)="closeAlert()"
+  ></ion-alert>
+</ion-content>

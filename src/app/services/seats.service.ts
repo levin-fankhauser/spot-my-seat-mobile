@@ -83,6 +83,32 @@ export class SeatsService {
     return data;
   }
 
+  async updateSeat(
+    id: string,
+    seat: {
+      train: string;
+      total_wagons: number;
+      your_wagon: number;
+      floor: number;
+      from: string;
+      to: string;
+      date_time: string;
+      seat: number;
+      image?: string;
+    }
+  ) {
+    console.log('Seat', id, 'updated with values:', seat);
+
+    const { data, error } = await supabase
+      .from(this.table)
+      .update([seat])
+      .eq('id', id)
+      .select();
+
+    if (error) throw error;
+    return data;
+  }
+
   async deleteSeat(seatId: string) {
     const { error } = await supabase.from(this.table).delete().eq('id', seatId);
 

@@ -1,5 +1,5 @@
 <ion-item-sliding>
-  <ion-item button="true" (click)="routeToItem()">
+  <ion-item button="true" (click)="routeToShowItem()">
     <!-- Later something like /seats/id -->
     <div>
       <ion-label
@@ -10,7 +10,7 @@
     </div>
   </ion-item>
   <ion-item-options side="end">
-    <ion-item-option>
+    <ion-item-option (click)="routeToEditItem()">
       <ion-icon slot="icon-only" name="create-outline"></ion-icon>
     </ion-item-option>
     <ion-item-option color="danger" (click)="deleteItem()">

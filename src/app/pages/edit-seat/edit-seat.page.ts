@@ -1,47 +1,56 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import {
-  IonAlert,
-  IonButton,
-  IonContent,
-  IonTitle,
-} from '@ionic/angular/standalone';
+import { HeaderComponent } from '../../components/header/header.component';
+import { IonicModule } from '@ionic/angular';
+import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
 import { Seat } from 'src/app/models/seat';
 import { SeatsService } from 'src/app/services/seats.service';
 import { supabase } from 'src/app/services/supabase.service';
-import { HeaderComponent } from '../../components/header/header.component';
-import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
-  selector: 'app-create-seat',
-  templateUrl: './create-seat.page.html',
-  styleUrls: ['./create-seat.page.scss'],
+  selector: 'app-edit-seat',
+  templateUrl: './edit-seat.page.html',
+  styleUrls: ['./edit-seat.page.scss'],
   standalone: true,
   imports: [
-    IonAlert,
-    IonButton,
-    IonContent,
-    IonTitle,
+    IonicModule,
     CommonModule,
     FormsModule,
     HeaderComponent,
     SeatPickerComponent,
   ],
 })
-export class CreateSeatPage {
+export class EditSeatPage implements OnInit {
+  seatId: string | null = null;
   seat: Seat | undefined;
 
   isAlertOpen = false;
   alertButtons = ['OK'];
 
-  constructor(private seatsService: SeatsService) {}
+  constructor(
+    private seatsService: SeatsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {}
 
-  async createSeat() {
-    const userId = (await supabase.auth.getUser()).data.user?.id;
+  async ngOnInit() {
+    this.seatId = this.route.snapshot.paramMap.get('id');
 
+    if (this.seatId) {
+      this.seat = await this.seatsService.getSeatById(this.seatId);
+      if (!this.seat) {
+        this.router.navigateByUrl('/home');
+        this.isAlertOpen = true;
+      }
+    }
+  }
+
+  async editSeat() {
     try {
       if (
+        this.seatId &&
         this.seat?.train &&
         this.seat?.totalWagons &&
         this.seat?.yourWagon &&
@@ -50,10 +59,9 @@ export class CreateSeatPage {
         this.seat?.to &&
         this.seat?.dateTime &&
         this.seat?.seat &&
-        this.seat?.image &&
-        userId
+        this.seat?.image
       ) {
-        await this.seatsService.addSeat({
+        await this.seatsService.updateSeat(this.seatId, {
           train: this.seat.train,
           date_time: this.seat.dateTime,
           floor: this.seat.floor as unknown as number,
@@ -63,7 +71,6 @@ export class CreateSeatPage {
           total_wagons: this.seat.totalWagons as unknown as number,
           your_wagon: this.seat.yourWagon as unknown as number,
           image: this.seat.image,
-          user_id: userId,
         });
       } else {
         this.isAlertOpen = true;

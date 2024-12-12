@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IonRadio, IonRadioGroup, IonButton } from '@ionic/angular/standalone';
 
@@ -10,7 +10,7 @@ import { IonRadio, IonRadioGroup, IonButton } from '@ionic/angular/standalone';
   imports: [IonRadioGroup, IonRadio, FormsModule],
 })
 export class S3Component {
-  seatValue = '';
+  @Input() seatValue = '';
   constructor() {}
 
   @Output()
