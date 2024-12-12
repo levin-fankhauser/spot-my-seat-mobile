@@ -4,9 +4,9 @@
   <ion-title align="center">
     <h1>Seat {{seatId}}</h1>
   </ion-title>
-  @if (seat?.train === 's3') {
+  @if (seat?.train === 's3' && seatNumber) {
   <div align="center">
-    <app-s3-display [seat]="seatNumber ?? 0" [id]="seat?.id ?? ''" />
+    <app-s3-display [seat]="seatNumber" />
   </div>
   }
   <ion-item>

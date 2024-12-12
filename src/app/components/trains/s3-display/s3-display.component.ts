@@ -9,7 +9,6 @@ import { Router } from '@angular/router';
 })
 export class S3DisplayComponent implements OnInit {
   @Input() seat!: number;
-  @Input() id!: string;
 
   constructor(private router: Router) {}
 

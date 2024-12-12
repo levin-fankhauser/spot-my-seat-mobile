@@ -7,6 +7,7 @@ import { SeatItemComponent } from '../../components/seat-item/seat-item.componen
 import { SeatsService } from 'src/app/services/seats.service';
 import { Seat } from 'src/app/models/seat';
 import { ActivatedRoute } from '@angular/router';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-manage',
@@ -37,7 +38,12 @@ export class ManagePage {
     this.seats = await this.seatsService.getAllSeatsForUser();
   }
 
-  onItemDeleted() {
+  async onItemDeleted() {
     this.loadSeats();
+    const toast = await toastController.create({
+      message: 'Seat deleted successfully!',
+      duration: 1500,
+    });
+    await toast.present();
   }
 }

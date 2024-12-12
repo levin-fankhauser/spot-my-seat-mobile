@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { IonContent } from '@ionic/angular/standalone';
 import { AuthService } from 'src/app/services/auth.service';
 import { HeaderComponent } from '../../components/header/header.component';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-register',
@@ -30,7 +31,12 @@ export class RegisterPage {
         alert('Registrierung fehlgeschlagen: ' + error.message);
       } else {
         console.log('Registrierung erfolgreich:', data);
-        this.router.navigate(['/login']);
+        const toast = await toastController.create({
+          message: 'Account created successfully!',
+          duration: 1500,
+        });
+        await toast.present();
+        this.router.navigateByUrl('/home');
       }
     } catch (err) {
       console.error('Fehler beim Registrieren:', err);

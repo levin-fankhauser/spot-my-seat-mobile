@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import {
   IonAlert,
   IonButton,
@@ -12,6 +13,7 @@ import { SeatsService } from 'src/app/services/seats.service';
 import { supabase } from 'src/app/services/supabase.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-create-seat',
@@ -35,7 +37,7 @@ export class CreateSeatPage {
   isAlertOpen = false;
   alertButtons = ['OK'];
 
-  constructor(private seatsService: SeatsService) {}
+  constructor(private seatsService: SeatsService, private router: Router) {}
 
   async createSeat() {
     const userId = (await supabase.auth.getUser()).data.user?.id;
@@ -65,6 +67,13 @@ export class CreateSeatPage {
           image: this.seat.image,
           user_id: userId,
         });
+
+        const toast = await toastController.create({
+          message: 'Seat created successfully!',
+          duration: 1500,
+        });
+        await toast.present();
+        this.router.navigateByUrl('/home');
       } else {
         this.isAlertOpen = true;
       }

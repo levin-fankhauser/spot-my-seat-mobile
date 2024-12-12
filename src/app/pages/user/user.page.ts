@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../../components/header/header.component';
 import { supabase } from 'src/app/services/supabase.service';
 import { AuthService } from 'src/app/services/auth.service';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-user',
@@ -23,5 +24,10 @@ export class UserPage implements OnInit {
 
   async singOut() {
     await this.authService.signOut();
+    const toast = await toastController.create({
+      message: 'Logged out successfully! Bye!',
+      duration: 2000,
+    });
+    await toast.present();
   }
 }

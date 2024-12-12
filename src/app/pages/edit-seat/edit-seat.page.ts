@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from '../../components/header/header.component';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
 import { Seat } from 'src/app/models/seat';
 import { SeatsService } from 'src/app/services/seats.service';
-import { supabase } from 'src/app/services/supabase.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { HeaderComponent } from '../../components/header/header.component';
+import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-edit-seat',
@@ -72,6 +72,12 @@ export class EditSeatPage implements OnInit {
           your_wagon: this.seat.yourWagon as unknown as number,
           image: this.seat.image,
         });
+        const toast = await toastController.create({
+          message: 'Seat edited successfully!',
+          duration: 1500,
+        });
+        await toast.present();
+        this.router.navigateByUrl('/manage');
       } else {
         this.isAlertOpen = true;
       }

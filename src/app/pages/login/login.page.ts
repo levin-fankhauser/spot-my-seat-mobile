@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { HeaderComponent } from '../../components/header/header.component';
 import { Router } from '@angular/router';
 import { supabase } from 'src/app/services/supabase.service';
+import { toastController } from '@ionic/core';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +22,7 @@ export class LoginPage {
   constructor(private router: Router, private authService: AuthService) {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
+        this.showToast();
         this.router.navigateByUrl('/home');
       }
     });
@@ -37,5 +39,13 @@ export class LoginPage {
 
   routeTo(path: string) {
     this.router.navigateByUrl(path);
+  }
+
+  async showToast() {
+    const toast = await toastController.create({
+      message: 'Hi! Logged in successfully!',
+      duration: 2000,
+    });
+    await toast.present();
   }
 }
