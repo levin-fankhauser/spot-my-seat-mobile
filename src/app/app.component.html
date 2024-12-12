@@ -29,8 +29,8 @@
         <ion-list [inset]="true">
           <ion-item>
             <ion-toggle
-              [checked]="paletteToggle"
-              (ionChange)="toggleChange($event)"
+              [(ngModel)]="paletteToggle"
+              (ionChange)="toggleChange()"
               justify="space-between"
               >Dark Mode</ion-toggle
             >

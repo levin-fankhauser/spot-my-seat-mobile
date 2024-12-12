@@ -38,6 +38,8 @@ import {
   trainOutline,
   trainSharp,
 } from 'ionicons/icons';
+import { PrefrencesService } from './services/prefrences.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -61,6 +63,7 @@ import {
     IonLabel,
     IonRouterLink,
     IonRouterOutlet,
+    FormsModule,
   ],
 })
 export class AppComponent implements OnInit {
@@ -73,7 +76,7 @@ export class AppComponent implements OnInit {
   ];
   paletteToggle = false;
 
-  constructor() {
+  constructor(private preferencesService: PrefrencesService) {
     addIcons({
       home,
       homeOutline,
@@ -96,11 +99,15 @@ export class AppComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
+  async ngOnInit() {
+    // Lade die Präferenz für Dark Mode aus dem Service
+    const isDarkMode = await this.preferencesService.isDarkMode();
+
+    // Setze das Theme basierend auf den Präferenzen
+    this.initializeDarkPalette(isDarkMode);
+
+    // Beobachte Änderungen an den Systemeinstellungen und synchronisiere sie
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
-
-    this.initializeDarkPalette(prefersDark.matches);
-
     prefersDark.addEventListener('change', (mediaQuery) =>
       this.initializeDarkPalette(mediaQuery.matches)
     );
@@ -111,8 +118,9 @@ export class AppComponent implements OnInit {
     this.toggleDarkPalette(isDark);
   }
 
-  toggleChange(ev: CustomEvent) {
-    this.toggleDarkPalette(ev.detail.checked);
+  toggleChange() {
+    this.preferencesService.setTheme(this.paletteToggle);
+    this.toggleDarkPalette(this.paletteToggle);
   }
 
   toggleDarkPalette(shouldAdd: boolean) {
