@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SeatsService } from 'src/app/services/seats.service';
@@ -27,9 +27,13 @@ export class SeatPage implements OnInit {
   seatNumber: number | undefined;
   dateTime: string | undefined;
 
+  isAlertOpen = false;
+  alertButtons = ['OK'];
+
   constructor(
     private route: ActivatedRoute,
-    private seatsService: SeatsService
+    private seatsService: SeatsService,
+    private router: Router
   ) {}
 
   async ngOnInit() {
@@ -37,6 +41,11 @@ export class SeatPage implements OnInit {
 
     if (this.seatId) {
       this.seat = await this.seatsService.getSeatById(this.seatId);
+      if (!this.seat) {
+        this.router.navigateByUrl('/home');
+        this.isAlertOpen = true;
+      }
+
       this.seatNumber = this.seat.seat as unknown as number;
       this.dateTime = new Date(this.seat.dateTime).toLocaleString();
     }

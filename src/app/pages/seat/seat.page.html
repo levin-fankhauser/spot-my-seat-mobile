@@ -48,3 +48,10 @@
     </div>
   </ion-item>
 </ion-content>
+
+<ion-alert
+  [isOpen]="isAlertOpen"
+  header="This seat does not exist!"
+  message="Seat was deleted or has never existed."
+  [buttons]="alertButtons"
+></ion-alert>

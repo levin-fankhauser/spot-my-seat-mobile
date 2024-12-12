@@ -1,0 +1,14 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <ion-title align="center">
+    <h3>Search a Seat by ID</h3>
+  </ion-title>
+  <ion-item>
+    <ion-label position="floating">Seat ID</ion-label>
+    <ion-input [(ngModel)]="seatId" type="text" required></ion-input>
+  </ion-item>
+  <ion-button expand="block" (click)="searchForSeat()">
+    <ion-icon name="search" />
+  </ion-button>
+</ion-content>

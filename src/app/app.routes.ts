@@ -46,5 +46,12 @@ export const routes: Routes = [
     path: 'seat/:id',
     loadComponent: () =>
       import('./pages/seat/seat.page').then((m) => m.SeatPage),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'search',
+    loadComponent: () =>
+      import('./pages/search/search.page').then((m) => m.SearchPage),
+    canActivate: [AuthGuard],
   },
 ];
