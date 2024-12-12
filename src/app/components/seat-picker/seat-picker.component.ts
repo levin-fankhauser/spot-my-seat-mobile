@@ -12,8 +12,8 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
-import { S3Component } from '../trains/s3/s3.component';
 import { Seat } from 'src/app/models/seat';
+import { S3Component } from '../trains/s3/s3.component';
 
 @Component({
   selector: 'app-seat-picker',

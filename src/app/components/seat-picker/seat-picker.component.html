@@ -69,18 +69,8 @@
   </div>
 
   <div class="right-form">
-    @if (true) {
+    @if (trainValue === 's3') {
     <app-s3 (selectedSeat)="setSeatValue($event)" />
     }
-    <div>
-      {{ trainValue }} <br />
-      {{ totalWagonsValue }}<br />
-      {{ yourWagonValue }}<br />
-      {{ floorValue }}<br />
-      {{ fromValue }}<br />
-      {{ toValue }}<br />
-      {{ dateTimeValue }}<br />
-      {{ seatValue }}<br />
-    </div>
   </div>
 </div>

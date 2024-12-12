@@ -1,7 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonTitle, IonButton } from '@ionic/angular/standalone';
+import {
+  IonContent,
+  IonTitle,
+  IonButton,
+  IonAlert,
+} from '@ionic/angular/standalone';
 import { HeaderComponent } from '../../components/header/header.component';
 import { SeatPickerComponent } from '../../components/seat-picker/seat-picker.component';
 import { Seat } from 'src/app/models/seat';
@@ -15,6 +20,7 @@ import { supabase } from 'src/app/services/supabase.service';
   styleUrls: ['./create-seat.page.scss'],
   standalone: true,
   imports: [
+    IonAlert,
     IonButton,
     IonContent,
     IonTitle,
@@ -26,10 +32,11 @@ import { supabase } from 'src/app/services/supabase.service';
 })
 export class CreateSeatPage {
   seat: Seat | undefined;
-  constructor(
-    private seatsService: SeatsService,
-    private authService: AuthService
-  ) {}
+
+  isAlertOpen = false;
+  alertButtons = ['OK'];
+
+  constructor(private seatsService: SeatsService) {}
 
   async createSeat() {
     const userId = (await supabase.auth.getUser()).data.user?.id;
@@ -60,7 +67,7 @@ export class CreateSeatPage {
           user_id: userId,
         });
       } else {
-        alert('All fields required');
+        this.isAlertOpen = true;
       }
     } catch (error) {
       console.error('Error fetching seats:', error);
@@ -69,5 +76,9 @@ export class CreateSeatPage {
 
   setSeat(seat: Seat) {
     this.seat = seat;
+  }
+
+  closeAlert() {
+    this.isAlertOpen = false;
   }
 }

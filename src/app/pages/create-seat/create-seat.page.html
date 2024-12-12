@@ -7,4 +7,11 @@
       >Create Seat</ion-button
     >
   </form>
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    header="All fields are required!"
+    message="Fill in all fields to continue."
+    [buttons]="alertButtons"
+    (didDismiss)="closeAlert()"
+  ></ion-alert>
 </ion-content>
