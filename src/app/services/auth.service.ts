@@ -20,10 +20,4 @@ export class AuthService {
     this.router.navigateByUrl('/home');
     return await supabase.auth.signOut();
   }
-
-  async resetPassword(email: string) {
-    return await supabase.auth.resetPasswordForEmail(email);
-  }
-
-  async isUserLoggedIn() {}
 }

@@ -30,7 +30,6 @@ export class RegisterPage {
         alert('Registrierung fehlgeschlagen: ' + error.message);
       } else {
         console.log('Registrierung erfolgreich:', data);
-        alert('Registrierung erfolgreich! Bitte loggen Sie sich ein.');
         this.router.navigate(['/login']);
       }
     } catch (err) {
