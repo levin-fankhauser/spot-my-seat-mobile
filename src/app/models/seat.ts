@@ -1,4 +1,5 @@
 export interface Seat {
+  id?: string;
   train: 's3';
   totalWagons: string;
   yourWagon: string;

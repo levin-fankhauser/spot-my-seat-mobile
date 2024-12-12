@@ -1,0 +1,20 @@
+<ion-item-sliding>
+  <ion-item button="true" (click)="routeTo('/home')">
+    <!-- Later something like /seats/id -->
+    <div>
+      <ion-label
+        >Seat from <strong>{{ from }}</strong> to
+        <strong>{{ to }}</strong></ion-label
+      >
+      <ion-note>At: {{ dateTime }}</ion-note>
+    </div>
+  </ion-item>
+  <ion-item-options side="end">
+    <ion-item-option>
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-item-option>
+    <ion-item-option color="danger" (click)="deleteItem()">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
