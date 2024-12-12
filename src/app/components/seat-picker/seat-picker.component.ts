@@ -17,6 +17,7 @@ import { S3Component } from '../trains/s3/s3.component';
 import { SeatsService } from 'src/app/services/seats.service';
 import { CommonModule } from '@angular/common';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
+import { GeolocatorService } from 'src/app/services/geolocation.service';
 
 @Component({
   selector: 'app-seat-picker',
@@ -48,19 +49,23 @@ export class SeatPickerComponent implements OnInit {
   totalWagonsValue = '8';
   yourWagonValue = '';
   floorValue: '0' | '1' = '1';
-  fromValue = 'Basel';
-  toValue = 'Bern';
+  fromValue = '';
+  toValue = '';
   dateTimeValue = new Date().toISOString();
   imageValue = '';
   seatValue = '';
 
   photo: File | undefined;
 
-  constructor(private seatService: SeatsService) {
+  constructor(
+    private seatService: SeatsService,
+    private geolocationService: GeolocatorService
+  ) {
     addIcons({ camera });
   }
 
   ngOnInit(): void {
+    this.getCurrentLocation();
     if (this.initialSeat) {
       this.trainValue = this.initialSeat.train;
       this.totalWagonsValue = this.initialSeat.totalWagons;
@@ -96,11 +101,11 @@ export class SeatPickerComponent implements OnInit {
     this.seat.emit(seat);
   }
 
-  pickImage() {
-    const fileInput = document.querySelector(
-      'input[type="file"]'
-    ) as HTMLElement;
-    fileInput.click();
+  async getCurrentLocation() {
+    const position = await this.geolocationService.getCurrentPositionName();
+    position.subscribe((position: any) => {
+      this.fromValue = position.address.village;
+    });
   }
 
   async takePhoto() {

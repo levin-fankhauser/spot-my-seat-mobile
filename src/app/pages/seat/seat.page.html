@@ -5,7 +5,7 @@
     <h1>Seat {{seatId}}</h1>
   </ion-title>
   @if (seat?.train === 's3' && seatNumber) {
-  <div align="center">
+  <div align="center" style="margin-bottom: 20px">
     <app-s3-display [seat]="seatNumber" />
   </div>
   }
