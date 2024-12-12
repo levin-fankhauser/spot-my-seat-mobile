@@ -51,8 +51,8 @@ export class CreateSeatPage {
         this.seat?.to &&
         this.seat?.dateTime &&
         this.seat?.seat &&
+        this.seat?.image &&
         userId
-        // && this.seat?.image
       ) {
         await this.seatsService.addSeat({
           train: this.seat.train,

@@ -53,6 +53,9 @@
       fill="outline"
     />
     <ion-datetime-button datetime="datetime"></ion-datetime-button>
+    <ion-button (click)="takePhoto()" size="default">
+      <ion-icon name="camera"></ion-icon>
+    </ion-button>
 
     <ion-modal [keepContentsMounted]="true">
       <ng-template>
@@ -63,9 +66,6 @@
         ></ion-datetime>
       </ng-template>
     </ion-modal>
-    <ion-button>
-      <ion-icon icon="camera" />
-    </ion-button>
   </div>
 
   <div class="right-form">

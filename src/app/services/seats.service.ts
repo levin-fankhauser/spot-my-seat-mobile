@@ -64,4 +64,35 @@ export class SeatsService {
 
     if (error) throw error;
   }
+
+  async uploadPhoto(file: File): Promise<string> {
+    const bucketName = 'seat-images';
+    try {
+      const { data, error } = await supabase.storage
+        .from(bucketName)
+        .upload(file.name, file, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+
+      if (error) {
+        throw error;
+      }
+
+      const { data: publicData } = supabase.storage
+        .from(bucketName)
+        .getPublicUrl(file.name);
+
+      if (!publicData) {
+        const publicError = new Error('Failed to retrieve public URL');
+        console.error('Error getting public URL:', publicError);
+        throw publicError;
+      }
+
+      return publicData.publicUrl;
+    } catch (err) {
+      console.error('Error uploading file:', err);
+      throw new Error('Upload failed');
+    }
+  }
 }

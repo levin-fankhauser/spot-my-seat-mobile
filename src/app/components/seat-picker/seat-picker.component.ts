@@ -14,6 +14,9 @@ import { addIcons } from 'ionicons';
 import { camera } from 'ionicons/icons';
 import { Seat } from 'src/app/models/seat';
 import { S3Component } from '../trains/s3/s3.component';
+import { SeatsService } from 'src/app/services/seats.service';
+import { CommonModule } from '@angular/common';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-seat-picker',
@@ -31,6 +34,7 @@ import { S3Component } from '../trains/s3/s3.component';
     IonSelectOption,
     S3Component,
     FormsModule,
+    CommonModule,
   ],
 })
 export class SeatPickerComponent {
@@ -47,7 +51,9 @@ export class SeatPickerComponent {
   imageValue = '';
   seatValue = '';
 
-  constructor() {
+  photo: File | undefined;
+
+  constructor(private seatService: SeatsService) {
     addIcons({ camera });
   }
 
@@ -70,5 +76,49 @@ export class SeatPickerComponent {
     };
 
     this.seat.emit(seat);
+  }
+
+  pickImage() {
+    const fileInput = document.querySelector(
+      'input[type="file"]'
+    ) as HTMLElement;
+    fileInput.click();
+  }
+
+  async takePhoto() {
+    const photo = await Camera.getPhoto({
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+      quality: 100,
+    });
+
+    const fileName = Date.now() + '.jpeg';
+
+    const file = await this.urlToFile(photo.webPath!, fileName, 'image/jpeg');
+
+    if (file) {
+      this.uploadImage(file);
+    }
+  }
+
+  private async urlToFile(
+    url: string,
+    fileName: string,
+    mimeType: string
+  ): Promise<File> {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return new File([blob], fileName, { type: mimeType });
+  }
+
+  async uploadImage(file: File) {
+    if (file) {
+      try {
+        this.imageValue = await this.seatService.uploadPhoto(file);
+        console.log('Uploaded URL:', this.imageValue);
+      } catch (error) {
+        console.error('Error uploading photo:', error);
+      }
+    }
   }
 }
