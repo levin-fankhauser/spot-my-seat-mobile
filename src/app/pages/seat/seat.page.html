@@ -1,0 +1,50 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <ion-title align="center">
+    <h1>Seat {{seatId}}</h1>
+  </ion-title>
+  @if (seat?.train === 's3') {
+  <div align="center">
+    <app-s3-display [seat]="seatNumber ?? 0" [id]="seat?.id ?? ''" />
+  </div>
+  }
+  <ion-item>
+    <ion-label>Train</ion-label>
+    <strong>{{seat?.train?.toUpperCase()}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>Total Wagons</ion-label>
+    <strong>{{seat?.totalWagons}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>Your Wagon</ion-label>
+    <strong>{{seat?.yourWagon}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>Your Wagon</ion-label>
+    <strong>{{seat?.yourWagon}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>Floor</ion-label>
+    <!-- if expression somehow doesn't work with === -->
+    <strong>{{(seat?.floor == '1' ? 'First Floor' : 'Ground Floor')}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>From</ion-label>
+    <strong>{{seat?.from}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>To</ion-label>
+    <strong>{{seat?.to}}</strong>
+  </ion-item>
+  <ion-item>
+    <ion-label>At</ion-label>
+    <strong>{{dateTime}}</strong>
+  </ion-item>
+  <ion-item>
+    <div>
+      <img [src]="seat?.image" />
+    </div>
+  </ion-item>
+</ion-content>

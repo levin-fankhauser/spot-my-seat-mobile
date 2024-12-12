@@ -116,6 +116,7 @@ export class SeatPickerComponent {
       try {
         this.imageValue = await this.seatService.uploadPhoto(file);
         console.log('Uploaded URL:', this.imageValue);
+        this.onInputChange();
       } catch (error) {
         console.error('Error uploading photo:', error);
       }

@@ -1,0 +1,32 @@
+.train-outline {
+    padding: 50px 5px;
+    border: 2px solid grey;
+    width: 150px;
+    height: 500px;
+    border-radius: 60px;
+    border-end-start-radius: 30px;
+    border-end-end-radius: 30px;
+}
+
+.four {
+    height: 20px;
+    width: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 25px;
+    border: 2px solid gray;
+    border-radius: 10px;
+}
+
+.select {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.group {
+    display: flex;
+    justify-content: space-between;
+}

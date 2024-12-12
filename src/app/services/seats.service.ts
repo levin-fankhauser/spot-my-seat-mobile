@@ -36,6 +36,30 @@ export class SeatsService {
     return seat;
   }
 
+  async getSeatById(seatId: string) {
+    const { data, error } = await supabase
+      .from(this.table)
+      .select('*')
+      .eq('id', seatId);
+    if (error) throw error;
+
+    const seat: Seat[] = data.map((seat) => ({
+      dateTime: seat.date_time,
+      floor: seat.floor,
+      from: seat.from,
+      id: seat.id,
+      image: seat.image,
+      seat: seat.seat,
+      to: seat.to,
+      totalWagons: seat.total_wagons,
+      train: seat.train,
+      yourWagon: seat.your_wagon,
+      userId: seat.user_id,
+    }));
+
+    return seat[0];
+  }
+
   async addSeat(seat: {
     train: string;
     total_wagons: number;
