@@ -102,6 +102,12 @@ export class SeatPickerComponent implements OnInit {
     this.seat.emit(seat);
   }
 
+  validateYourWagon() {
+    if (this.yourWagonValue > this.totalWagonsValue) {
+      this.yourWagonValue = '';
+    }
+  }
+
   async getCurrentLocation() {
     const position = await this.geolocationService.getCurrentPositionName();
     position.subscribe((position: any) => {

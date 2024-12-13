@@ -7,6 +7,7 @@
       interface="popover"
       label-placement="floating"
       fill="outline"
+      required
     >
       <ion-select-option value="s3">S3</ion-select-option>
       <!-- <ion-select-option value="ir27">IR27</ion-select-option> -->
@@ -18,14 +19,18 @@
       labelPlacement="floating"
       fill="outline"
       type="number"
+      required
+      errorText="Fill in a valid Number"
     />
     <ion-input
       [(ngModel)]="yourWagonValue"
-      (ngModelChange)="onInputChange()"
+      (ngModelChange)="onInputChange(); validateYourWagon()"
       label="Your Wagon"
       labelPlacement="floating"
       fill="outline"
       type="number"
+      required
+      errorText="Fill in a valid Number which is smaller than total Wagons"
     />
     <ion-select
       [(ngModel)]="floorValue"
@@ -34,6 +39,7 @@
       interface="popover"
       label-placement="floating"
       fill="outline"
+      required
     >
       <ion-select-option value="0">Ground floor</ion-select-option>
       <ion-select-option value="1">First floor</ion-select-option>
@@ -44,6 +50,8 @@
       label="From"
       labelPlacement="floating"
       fill="outline"
+      required
+      errorText="Fill in a valid Location"
     />
     <ion-input
       [(ngModel)]="toValue"
@@ -51,6 +59,8 @@
       label="To"
       labelPlacement="floating"
       fill="outline"
+      required
+      errorText="Fill in a valid Location"
     />
     <ion-datetime-button datetime="datetime"></ion-datetime-button>
     <ion-button (click)="takePhoto()" size="default">
@@ -66,6 +76,7 @@
           id="datetime"
           [(ngModel)]="dateTimeValue"
           (ngModelChange)="onInputChange()"
+          required
         ></ion-datetime>
       </ng-template>
     </ion-modal>
