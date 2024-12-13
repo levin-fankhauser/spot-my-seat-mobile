@@ -19,6 +19,11 @@ export class RegisterPage {
   email: string = '';
   password: string = '';
 
+  isAlertOpen = false;
+  alertButtons = ['OK'];
+  alertHeader = 'Register failed';
+  alertMessage = '';
+
   constructor(private authService: AuthService, private router: Router) {}
 
   async register() {
@@ -27,8 +32,8 @@ export class RegisterPage {
       const { data, error } = await this.authService.signUp(email, password);
 
       if (error) {
-        console.error('Registrierung fehlgeschlagen:', error.message);
-        alert('Registrierung fehlgeschlagen: ' + error.message);
+        this.isAlertOpen = true;
+        this.alertMessage = error.message;
       } else {
         console.log('Registrierung erfolgreich:', data);
         const toast = await toastController.create({
@@ -46,5 +51,9 @@ export class RegisterPage {
 
   routeTo(path: string) {
     this.router.navigateByUrl(path);
+  }
+
+  closeAlert() {
+    this.isAlertOpen = false;
   }
 }

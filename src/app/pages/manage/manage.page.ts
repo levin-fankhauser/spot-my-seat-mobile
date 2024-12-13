@@ -35,7 +35,8 @@ export class ManagePage {
   }
 
   async loadSeats() {
-    this.seats = await this.seatsService.getAllSeatsForUser();
+    const seats = await this.seatsService.getAllSeatsForUser();
+    this.seats = seats.sort((a, b) => Number(a.id) - Number(b.id));
   }
 
   async onItemDeleted() {

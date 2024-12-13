@@ -19,6 +19,11 @@ export class LoginPage {
   email = '';
   password = '';
 
+  isAlertOpen = false;
+  alertButtons = ['OK'];
+  alertHeader = 'Login failed';
+  alertMessage = '';
+
   constructor(private router: Router, private authService: AuthService) {
     supabase.auth.onAuthStateChange((_event, session) => {
       if (session) {
@@ -31,7 +36,9 @@ export class LoginPage {
   async login() {
     const { error } = await this.authService.signIn(this.email, this.password);
     if (error) {
-      console.error('Login failed:', error.message);
+      this.isAlertOpen = true;
+      this.alertMessage =
+        error.message.charAt(0).toUpperCase() + error.message.slice(1);
     } else {
       console.log('Login successful');
     }
@@ -47,5 +54,9 @@ export class LoginPage {
       duration: 2000,
     });
     await toast.present();
+  }
+
+  closeAlert() {
+    this.isAlertOpen = false;
   }
 }

@@ -29,3 +29,10 @@
     >Register</ion-button
   >
 </ion-content>
+<ion-alert
+  [isOpen]="isAlertOpen"
+  [header]="alertHeader"
+  [message]="alertMessage"
+  [buttons]="alertButtons"
+  (didDismiss)="closeAlert()"
+></ion-alert>
