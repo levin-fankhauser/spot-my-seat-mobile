@@ -46,7 +46,7 @@ export class SeatPickerComponent implements OnInit {
   initialSeat: Seat | undefined | null;
 
   trainValue: 's3' = 's3';
-  totalWagonsValue = '8';
+  totalWagonsValue = '10';
   yourWagonValue = '';
   floorValue: '0' | '1' = '1';
   fromValue = '';
@@ -103,7 +103,13 @@ export class SeatPickerComponent implements OnInit {
   }
 
   validateYourWagon() {
-    if (this.yourWagonValue > this.totalWagonsValue) {
+    const yourWagon = Number(this.yourWagonValue);
+    const totalWagons = Number(this.totalWagonsValue);
+
+    console.log('Your wagon:', yourWagon);
+    console.log('Total wagons:', totalWagons);
+
+    if (yourWagon > totalWagons) {
       this.yourWagonValue = '';
     }
   }
