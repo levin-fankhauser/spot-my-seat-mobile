@@ -60,4 +60,10 @@ export const routes: Routes = [
       import('./pages/edit-seat/edit-seat.page').then((m) => m.EditSeatPage),
     canActivate: [AuthGuard],
   },
+  {
+    path: 'blog',
+    loadComponent: () =>
+      import('./pages/blog/blog.page').then((m) => m.BlogPage),
+    canActivate: [AuthGuard],
+  },
 ];

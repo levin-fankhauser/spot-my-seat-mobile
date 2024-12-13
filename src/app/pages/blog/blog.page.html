@@ -1,0 +1,23 @@
+<app-header />
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-title align="center">
+      <h3>Blog</h3>
+    </ion-title>
+    <div *ngFor="let post of posts">
+      <app-post [post]="post"></app-post>
+    </div>
+  </ion-list>
+  <ion-infinite-scroll>
+    <ion-infinite-scroll-content
+      loadingSpinner="none"
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <ion-item class="input">
+    <ion-textarea placeholder="Write a post..." [(ngModel)]="content" />
+    <ion-button slot="end" (click)="createPost()" [disabled]="!content">
+      <ion-icon name="send" />
+    </ion-button>
+  </ion-item>
+</ion-content>
