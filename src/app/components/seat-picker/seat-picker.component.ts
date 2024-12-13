@@ -65,7 +65,6 @@ export class SeatPickerComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getCurrentLocation();
     if (this.initialSeat) {
       this.trainValue = this.initialSeat.train;
       this.totalWagonsValue = this.initialSeat.totalWagons;
@@ -77,6 +76,8 @@ export class SeatPickerComponent implements OnInit {
       this.dateTimeValue = this.initialSeat.dateTime;
       this.imageValue = this.initialSeat.image;
       this.seatValue = (this.initialSeat.seat as unknown as number).toString();
+    } else {
+      this.getCurrentLocation();
     }
   }
 
