@@ -74,7 +74,7 @@ export class AppComponent implements OnInit {
     { title: 'Search Seat by ID', url: '/', icon: 'search' },
     { title: 'Manage my Seats', url: '/manage', icon: 'cog' },
   ];
-  paletteToggle = false;
+  paletteToggle = true;
 
   constructor(private preferencesService: PrefrencesService) {
     addIcons({

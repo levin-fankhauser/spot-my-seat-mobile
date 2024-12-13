@@ -2,9 +2,11 @@
 
 <ion-content [fullscreen]="true">
   <ion-title><h3 align="center">Manage your seats</h3></ion-title>
-  <app-seat-item
-    *ngFor="let seat of seats"
-    [seat]="seat"
-    (itemDeleted)="onItemDeleted()"
-  />
+  <ion-list>
+    <app-seat-item
+      *ngFor="let seat of seats"
+      [seat]="seat"
+      (itemDeleted)="onItemDeleted()"
+    />
+  </ion-list>
 </ion-content>

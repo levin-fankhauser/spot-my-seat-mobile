@@ -7,8 +7,11 @@ import {
   IonCardHeader,
   IonCardTitle,
   IonContent,
+  IonIcon,
   IonTitle,
 } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { bookmark, chatbubbles, cog, search, train } from 'ionicons/icons';
 import { HeaderComponent } from '../../components/header/header.component';
 
 @Component({
@@ -17,6 +20,7 @@ import { HeaderComponent } from '../../components/header/header.component';
   styleUrls: ['./home.page.scss'],
   standalone: true,
   imports: [
+    IonIcon,
     IonCardTitle,
     IonCardHeader,
     IonCard,
@@ -28,7 +32,15 @@ import { HeaderComponent } from '../../components/header/header.component';
   ],
 })
 export class HomePage {
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+    addIcons({
+      bookmark,
+      train,
+      chatbubbles,
+      search,
+      cog,
+    });
+  }
 
   routeTo(path: string) {
     this.router.navigateByUrl(path);

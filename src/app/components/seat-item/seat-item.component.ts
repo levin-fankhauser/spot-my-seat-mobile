@@ -4,7 +4,6 @@ import { IonicModule } from '@ionic/angular';
 import { addIcons } from 'ionicons';
 import { createOutline, trashOutline } from 'ionicons/icons';
 import { Seat } from 'src/app/models/seat';
-import { ManagePage } from 'src/app/pages/manage/manage.page';
 import { SeatsService } from 'src/app/services/seats.service';
 
 @Component({
